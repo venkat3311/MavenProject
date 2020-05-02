@@ -1,5 +1,7 @@
 package Maven.Selemium;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,16 +10,15 @@ import org.openqa.selenium.support.ui.Select;
 public class Fb_dd {
 
 	public static void main(String[] args) throws Exception {
-		// Launch browser
-		// System.setProperty("webdriver.gecko.driver",
-		// "E:\\DriverServer\\geckodriver.exe");
-		// WebDriver d=new FirefoxDriver();
-		// d=new FirefoxDriver();
 		System.setProperty("webdriver.chrome.driver", "E:\\AU\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
-		// Load web page
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+
 		driver.get("https://www.facebook.com/");
-		// DD
+		// Dropdown DD
 		Select dd = new Select(driver.findElement(By.id("month")));
 		dd.selectByIndex(3);
 		Thread.sleep(1000);
@@ -30,7 +31,7 @@ public class Fb_dd {
 		Thread.sleep(3000);
 		// close browser
 		driver.quit();
-
+		System.out.println("End statement of script");
 	}
 
 }
